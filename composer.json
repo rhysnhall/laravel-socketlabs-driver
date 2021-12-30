@@ -1,6 +1,6 @@
 {
   "name": "rhysnhall/laravel-socketlabs-driver",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "Laravel mail driver for SocketLabs injection API.",
   "type": "library",
   "keywords": [
@@ -23,9 +23,17 @@
     "illuminate/support": ">=8",
     "socketlabs/email-delivery": "^1.2"
   },
+  "require-dev": {
+    "phpunit/phpunit": "^9.5"
+  },
   "autoload": {
     "psr-4": {
       "Rhysnhall\\LaravelSocketLabsDriver\\": "src"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Rhysnhall\\LaravelSocketLabsDriver\\Tests\\": "tests/"
     }
   }
 }

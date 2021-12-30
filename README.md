@@ -13,14 +13,14 @@ composer require rhysnhall/laravel-socketlabs-driver
 ```
 
 ## Setup
-Once you register and setup an account with SocketLabs you'll be presented with a server ID and an API key. Add both of these to your ENV file.
+Once you register and set up an account with SocketLabs, you'll be presented with a server ID and an API key. Add both of these to your ENV file.
 
 ```
 SOCKET_LABS_API_KEY={your_key}
 SOCKET_LABS_SERVER_ID={server_id}
 ```
 
-Next add the SocketLabs credentials to your `config\services.php` config file.
+Next, add the SocketLabs credentials to your `config\services.php` config file.
 
 ```php
 'socketlabs' => [
@@ -49,14 +49,14 @@ The last step is to add the SocketLabs driver to the `config\mail.php` config fi
 ]
 ```
 
-Depending on your setup you may also want to set SocketLabs as your default mailer. You'll need to update the `MAIL_MAILER` variable in your ENV file.
+You may also want to set SocketLabs as your default mailer, depending on your setup. You'll need to update the `MAIL_MAILER` variable in your ENV file.
 
 ```
 MAIL_MAILER=socketlabs
 ```
 
 ## Config
-You can either add your config variables to the `config\mail.php` config file directly or you can create a new config file to hold these.
+You can directly add your config variables to the `config\mail.php` config file or create a new config file to hold these.
 
 **config\mail.php**
 ```php
@@ -106,7 +106,7 @@ Mail::to('recipient@example.com')->send(new \App\Mail\Test);
 ## Contributing
 Help improve this package by contributing.
 
-Before opening a pull request, please first discuss the proposed changes via Github issue or <a href="mailto:hello@rhyshall.com">email</a>.
+Before opening a pull request, please discuss the proposed changes via Github issue or <a href="mailto:hello@rhyshall.com">email</a>.
 
 ## License
 This project is licensed under the MIT License - see the [LICENSE](https://github.com/rhysnhall/etsy-php-sdk/blob/master/LICENSE.md) file for details

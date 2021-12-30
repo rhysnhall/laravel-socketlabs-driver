@@ -11,9 +11,19 @@ use Socketlabs\SocketLabsClient;
 use Socketlabs\Message\{
   BasicMessage,
   EmailAddress,
-  Attachment
+  Attachment,
+  CustomHeader
 };
 
+/**
+ * SocketLabs transport class.
+ *
+ * @author Rhys Hall hello@rhyshall.com
+ *
+ * @property SocketLabsClient $clinet
+ * @property BasicMessage $basic_message
+ * @property array $config
+ */
 class SocketLabsTransport extends Transport {
 
   /**
@@ -27,34 +37,23 @@ class SocketLabsTransport extends Transport {
   private $basic_message;
 
   /**
-   * @var string
+   * @var array
    */
-  private $mailing_id;
+  private $config;
 
   /**
-   * @var string
+   * Create a new instance of SocketLabsTransport.
+   *
+   * @param SocketLabsClient $client
+   * @param array $config
+   * @return void
    */
-  private $message_id;
-
   public function __construct(
     SocketLabsClient $client,
-    array $config
+    array $config = []
   ) {
-    if($config['retries'] ?? false) {
-      $client->numberOfRetries = $config['retries'];
-    }
-
-    if($config['timeout'] ?? false) {
-      $client->requestTimeout = $config['timeout'];
-    }
-
-    if($config['proxy_url'] ?? false) {
-      $client->proxyUrl = $config['proxy_url'];
-    }
-
+    $this->config = $config;
     $this->client = $client;
-    $this->mailing_id = $config['mailing_id'] ?? null;
-    $this->message_id = $config['message_id'] ?? null;
   }
 
   /**
@@ -86,12 +85,19 @@ class SocketLabsTransport extends Transport {
       $this->setProperty('replyTo', new EmailAddress(key($reply_to), $reply_to[key($reply_to)]));
     }
     $this->setProperty('charset', $message->getCharset() ?? 'utf-8');
-    $this->setProperty('mailingId', $this->mailing_id);
-    $this->setProperty('messageId', $this->message_id);
+    $this->setProperty('mailingId', $this->config['mailing_id'] ?? null);
+    $this->setProperty('messageId', $this->config['message_id'] ?? null);
 
     // Add attachments.
     $this->addAttachments($message);
-    
+
+    // Add custom headers.
+    if($this->config['headers'] ?? false) {
+      foreach($this->config['headers'] as $header => $value) {
+        $this->basic_message->customHeaders[] = new CustomHeader($header, $value);
+      }
+    }
+
     // Send the email.
     $response = $this->client->send($this->basic_message);
 
