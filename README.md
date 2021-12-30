@@ -1,4 +1,7 @@
 # Laravel SocketLabs Driver
+[![Latest Stable Version](http://poser.pugx.org/rhysnhall/laravel-socketlabs-driver/v)](https://packagist.org/packages/rhysnhall/laravel-socketlabs-driver)
+[![PHP Version Require](http://poser.pugx.org/rhysnhall/laravel-socketlabs-driver/require/php)](https://packagist.org/packages/rhysnhall/laravel-socketlabs-driver)
+
 Adds a driver for the SocketLabs Injection API to Laravel's email services.
 
 ## Requirements
